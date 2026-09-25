@@ -18,14 +18,18 @@ A full-stack food delivery web application built using Java, Servlets, JSP, JDBC
 
 ### 🚀 Live Demo
 
-> Full-stack live deployment link will be added after deploying the Java application.
-
-**Live Demo:**  
-[Coming Soon]
+🍔 **[Open Foodwala Live](https://foodwala-production.up.railway.app)**
 
 ### 💻 GitHub Repository
 
-[Foodwala – Java Full Stack Food Delivery Application](https://github.com/YOUR-USERNAME/Foodwala)
+📂 **[View Foodwala Source Code](https://github.com/anushamamidiece-max/Foodwala)**
+
+### 🔐 Demo Login
+
+- **Email:** `demo@foodwala.com`
+- **Password:** `demo123`
+
+> The live application is deployed using Docker and Apache Tomcat on Railway, with MySQL hosted on Railway.
 
 ---
 
