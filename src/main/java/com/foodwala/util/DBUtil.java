@@ -17,8 +17,10 @@ public class DBUtil {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     private static final String URL =
-            "jdbc:mysql://localhost:3306/foodwala?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-
+            System.getenv().getOrDefault(
+                    "FOODWALA_DB_URL",
+                    "jdbc:mysql://localhost:3306/foodwala?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+            );
     private static final String DB_USER =
             System.getenv().getOrDefault("FOODWALA_DB_USER", "root");
 
