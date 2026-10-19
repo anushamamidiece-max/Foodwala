@@ -7,47 +7,98 @@ import java.util.List;
 /** Model for the orders table (with its order_items attached). */
 public class Order {
 
-    private int id;
-    private int userId;
-    private int restaurantId;
-    private String restaurantName;
-    private int totalAmount;
-    private String deliveryAddress;
-    private String paymentMode;
-    private String status;
-    private Timestamp orderedAt;
+	private int id;
+	private int userId;
+	private int restaurantId;
+	private String restaurantName;
+	private int totalAmount;
+	private String deliveryAddress;
+	private String paymentMode;
+	private String status;
+	private Timestamp orderedAt;
 
-    private List<OrderItem> items = new ArrayList<>();
+	private List<OrderItem> items = new ArrayList<>();
 
-    public Order() { }
+	public Order() {
+	}
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+	public int getId() {
+		return id;
+	}
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getRestaurantId() { return restaurantId; }
-    public void setRestaurantId(int restaurantId) { this.restaurantId = restaurantId; }
+	public int getUserId() {
+		return userId;
+	}
 
-    public String getRestaurantName() { return restaurantName; }
-    public void setRestaurantName(String restaurantName) { this.restaurantName = restaurantName; }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    public int getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(int totalAmount) { this.totalAmount = totalAmount; }
+	public int getRestaurantId() {
+		return restaurantId;
+	}
 
-    public String getDeliveryAddress() { return deliveryAddress; }
-    public void setDeliveryAddress(String deliveryAddress) { this.deliveryAddress = deliveryAddress; }
+	public void setRestaurantId(int restaurantId) {
+		this.restaurantId = restaurantId;
+	}
 
-    public String getPaymentMode() { return paymentMode; }
-    public void setPaymentMode(String paymentMode) { this.paymentMode = paymentMode; }
+	public String getRestaurantName() {
+		return restaurantName;
+	}
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
 
-    public Timestamp getOrderedAt() { return orderedAt; }
-    public void setOrderedAt(Timestamp orderedAt) { this.orderedAt = orderedAt; }
+	public int getTotalAmount() {
+		return totalAmount;
+	}
 
-    public List<OrderItem> getItems() { return items; }
-    public void setItems(List<OrderItem> items) { this.items = items; }
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Timestamp getOrderedAt() {
+		return orderedAt;
+	}
+
+	public void setOrderedAt(Timestamp orderedAt) {
+		this.orderedAt = orderedAt;
+	}
+
+	public List<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
+	}
 }

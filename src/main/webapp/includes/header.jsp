@@ -14,9 +14,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* apply saved theme before first paint (no flash) */
+try { document.documentElement.setAttribute('data-theme', localStorage.getItem('fwTheme') || 'light'); } catch (e) {}
+</script>
 <title><%= pageTitle %> · Foodwala</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,6 +44,9 @@
         </form>
 
         <div class="nav-links">
+            <button id="themeToggle" class="theme-toggle" type="button" title="Toggle dark / light mode" aria-label="Toggle dark / light mode">
+                <span>☀️</span><span>🌙</span><span class="tt-knob"></span>
+            </button>
             <a href="<%= ctx %>/restaurants" class="nav-link ripple">Restaurants</a>
             <% if (loginUser != null) { %>
                 <a href="<%= ctx %>/orders" class="nav-link ripple">Orders</a>
@@ -59,3 +65,16 @@
         </div>
     </div>
 </nav>
+
+<script>
+/* dark / light toggle - remembered in localStorage */
+(function () {
+    var b = document.getElementById('themeToggle');
+    if (!b) return;
+    b.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('fwTheme', next); } catch (e) {}
+    });
+})();
+</script>

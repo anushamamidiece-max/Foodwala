@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/** Landing page - lists all 50 restaurants with search + cuisine filters. */
+/** Landing page - lists all 50 restaurants with search, cuisine,
+ *  pure-veg filter and sorting. */
 @WebServlet("/restaurants")
 public class HomeServlet extends HttpServlet {
 
@@ -24,12 +25,17 @@ public class HomeServlet extends HttpServlet {
 
         String q = request.getParameter("q");
         String cuisine = request.getParameter("cuisine");
+        boolean vegOnly = "1".equals(request.getParameter("veg"));
+        String sort = request.getParameter("sort");
 
         try {
-            List<Restaurant> restaurants = new RestaurantDAOImpl().getAll(q, cuisine);
+            List<Restaurant> restaurants =
+                    new RestaurantDAOImpl().getAll(q, cuisine, vegOnly, sort);
             request.setAttribute("restaurants", restaurants);
             request.setAttribute("q", q == null ? "" : q);
             request.setAttribute("cuisine", cuisine == null ? "" : cuisine);
+            request.setAttribute("vegOnly", vegOnly);
+            request.setAttribute("sort", sort == null ? "" : sort);
             request.setAttribute("pageTitle", "Order food online in Bengaluru");
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         } catch (Exception e) {

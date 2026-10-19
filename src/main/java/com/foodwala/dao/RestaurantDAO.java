@@ -9,9 +9,11 @@ public interface RestaurantDAO {
 
     /**
      * Lists restaurants, optionally filtered by a free-text search
-     * (name/cuisine) and/or a cuisine keyword. Pass null/empty to skip.
+     * (name/cuisine), a cuisine keyword and/or a pure-veg toggle,
+     * and sorted by rating / delivery time / cost.
+     * Pass null/empty/false to skip a filter.
      */
-    List<Restaurant> getAll(String search, String cuisine);
+    List<Restaurant> getAll(String search, String cuisine, boolean vegOnly, String sort);
 
     /** Single restaurant by id, or null. */
     Restaurant getById(int id);

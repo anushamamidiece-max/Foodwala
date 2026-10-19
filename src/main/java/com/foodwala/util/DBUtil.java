@@ -25,7 +25,7 @@ public class DBUtil {
             System.getenv().getOrDefault("FOODWALA_DB_USER", "root");
 
     private static final String DB_PASSWORD =
-            System.getenv().getOrDefault("FOODWALA_DB_PASSWORD", "");
+            System.getenv().getOrDefault("FOODWALA_DB_PASSWORD", "anusha");
     static {
         try {
             Class.forName(DRIVER);

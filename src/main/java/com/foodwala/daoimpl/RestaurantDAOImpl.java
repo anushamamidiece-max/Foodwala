@@ -15,7 +15,7 @@ import com.foodwala.util.DBUtil;
 public class RestaurantDAOImpl implements RestaurantDAO {
 
     @Override
-    public List<Restaurant> getAll(String search, String cuisine) {
+    public List<Restaurant> getAll(String search, String cuisine, boolean vegOnly, String sort) {
         List<Restaurant> list = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder(
@@ -30,7 +30,28 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         if (hasCuisine) {
             sql.append(" AND cuisines LIKE ?");
         }
-        sql.append(" ORDER BY rating DESC, id ASC");
+        if (vegOnly) {
+            sql.append(" AND is_pure_veg = 1");
+        }
+
+        // whitelist-based sort (no user text goes into the ORDER BY)
+        String order;
+        if ("delivery".equals(sort)) {
+            order = "delivery_time ASC, id ASC";
+        } else if ("cost_low".equals(sort)) {
+            order = "price_for_two ASC, id ASC";
+        } else if ("cost_high".equals(sort)) {
+            order = "price_for_two DESC, id ASC";
+        } else {
+            order = "rating DESC, id ASC";
+        }
+        sql.append(" ORDER BY ").append(order);
+
+        // Home page (no search, no cuisine pill) shows only the top 50 so the
+        // page stays short; pills / search / veg-filter always show ALL matches.
+        if (!hasSearch && !hasCuisine) {
+            sql.append(" LIMIT 50");
+        }
 
         Connection con = null;
         PreparedStatement ps = null;
@@ -53,7 +74,10 @@ public class RestaurantDAOImpl implements RestaurantDAO {
                 list.add(mapRow(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("MySQL error while loading restaurants: " + e.getMessage()
+                    + " - make sure MySQL is running, the 'foodwala' database was created by "
+                    + "sql/database.sql in MySQL Workbench, and DBUtil.java has the right "
+                    + "username/password.", e);
         } finally {
             DBUtil.close(con, ps, rs);
         }
